@@ -29,7 +29,7 @@ namespace Pomodoro
 
             ActiveTaskListView.ItemsSource = ActiveTasks;
             CompletedTaskListView.ItemsSource = CompletedTasks;
-            HistoryListView.ItemsSource = HistoryRecords; // Bind the left menu
+            HistoryListView.ItemsSource = HistoryRecords;
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -43,6 +43,7 @@ namespace Pomodoro
             _initialTime = TimeSpan.FromMinutes(minutes);
             _timeLeft = _initialTime;
             UpdateDisplay();
+            UpdateTimerProgress();
         }
 
         private void Timer_Tick(object sender, object e)
@@ -51,6 +52,7 @@ namespace Pomodoro
             {
                 _timeLeft = _timeLeft.Subtract(TimeSpan.FromSeconds(1));
                 UpdateDisplay();
+                UpdateTimerProgress();
             }
             else
             {
@@ -61,6 +63,19 @@ namespace Pomodoro
         private void UpdateDisplay()
         {
             TimerDisplay.Text = _timeLeft.ToString(@"mm\:ss");
+        }
+
+        private void UpdateTimerProgress()
+        {
+            if (_initialTime.TotalSeconds > 0)
+            {
+                double percent = (_timeLeft.TotalSeconds / _initialTime.TotalSeconds) * 100.0;
+                TimerProgress.Value = Math.Max(0, Math.Min(100, percent));
+            }
+            else
+            {
+                TimerProgress.Value = 0;
+            }
         }
 
         private void PrimaryAction_Click(object sender, RoutedEventArgs e)
@@ -108,7 +123,8 @@ namespace Pomodoro
                 var record = new SessionRecord
                 {
                     SessionTitle = $"Pomodoro #{_sessionCount}",
-                    TaskSummary = $"{CompletedTasks.Count} of {totalTasks} tasks completed"
+                    TaskSummary = $"{CompletedTasks.Count} of {totalTasks} tasks completed",
+                    Tasks = new ObservableCollection<string>(CompletedTasks.Select(t => t.Name))
                 };
 
                 // Add to the top of the history list
@@ -171,8 +187,16 @@ namespace Pomodoro
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             Reset_Click(null, null);
-            if (args.InvokedItemContainer.Tag.ToString() == "Focus") SetTime(25);
-            else if (args.InvokedItemContainer.Tag.ToString() == "Break") SetTime(5);
+            if (args.InvokedItemContainer?.Tag?.ToString() == "Focus") SetTime(25);
+            else if (args.InvokedItemContainer?.Tag?.ToString() == "Break") SetTime(5);
+        }
+
+        private void HistoryListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is SessionRecord record)
+            {
+                contentFrame.Content = new SessionDetailPage(record);
+            }
         }
     }
 
@@ -186,6 +210,7 @@ namespace Pomodoro
     {
         public string SessionTitle { get; set; }
         public string TaskSummary { get; set; }
+        public ObservableCollection<string> Tasks { get; set; } = new ObservableCollection<string>();
     }
 }
 

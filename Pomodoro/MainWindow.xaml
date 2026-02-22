@@ -16,25 +16,34 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" BorderBrush="LightGray" BorderThickness="0,0,1,0" Padding="0,0,16,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
+            <StackPanel Grid.Column="0" BorderBrush="LightGray" BorderThickness="0,0,1,0" Padding="0,0,16,0">
                 <TextBlock Text="Session History" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,16"/>
-
-                <ListView Grid.Row="1" x:Name="HistoryListView" SelectionMode="None">
+                <ListView x:Name="HistoryListView" SelectionMode="Single" ItemClick="HistoryListView_ItemClick" IsItemClickEnabled="True">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:SessionRecord">
-                            <StackPanel Margin="0,8">
-                                <TextBlock Text="{x:Bind SessionTitle}" FontWeight="SemiBold"/>
-                                <TextBlock Text="{x:Bind TaskSummary}" Foreground="Gray" FontSize="12"/>
-                            </StackPanel>
+                            <Border Margin="0,8" Padding="8" Background="#F7F7F7" CornerRadius="6">
+                                <StackPanel>
+                                    <Expander IsExpanded="False">
+                                        <Expander.Header>
+                                            <TextBlock Text="{x:Bind SessionTitle}" FontWeight="SemiBold" FontSize="16" Foreground="#222"/>
+                                        </Expander.Header>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind TaskSummary}" Foreground="Gray" FontSize="12" Margin="0,0,0,8"/>
+                                            <ItemsControl ItemsSource="{x:Bind Tasks}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding}" FontSize="14" Margin="8,0,0,0"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </Expander>
+                                </StackPanel>
+                            </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </Grid>
+            </StackPanel>
 
             <Grid Grid.Column="1" Padding="24,0,0,0" MaxWidth="600" HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
@@ -43,17 +52,28 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Spacing="20" Margin="0,0,0,20">
-                    <TextBox x:Name="TimerDisplay" Text="25:00" FontSize="80" FontWeight="Bold" 
-                             HorizontalAlignment="Center" TextAlignment="Center" 
-                             BorderThickness="0" Background="Transparent"
-                             LostFocus="TimerDisplay_LostFocus" />
-
+                    
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,10">
+                        <ProgressRing x:Name="TimerProgress" IsIndeterminate="False" Value="100" Maximum="100" 
+                                      Width="280" Height="280" Foreground="#20E585" />
+                        
+                    <TextBox x:Name="TimerDisplay" 
+                                Text="25:00" 
+                                FontSize="80" 
+                                FontWeight="Bold" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                TextAlignment="Center" 
+                                BorderThickness="0" 
+                                Background="Transparent"
+                                LostFocus="TimerDisplay_LostFocus" />
+                    </Grid>
                     <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
                         <Button x:Name="ResetBtn" Content="🔄" Click="Reset_Click" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Reset"/>
                         <Button x:Name="PrimaryActionBtn" Content="Start" Click="PrimaryAction_Click" Style="{StaticResource AccentButtonStyle}" Width="120" FontSize="18"/>
                         <Button x:Name="SkipBtn" Content="⏭" Click="Skip_Click" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Skip Session"/>
                     </StackPanel>
-                    <MenuFlyoutSeparator />
+                    <MenuFlyoutSeparator Margin="0,20,0,0"/>
                 </StackPanel>
 
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
@@ -76,10 +96,13 @@
                         <ListView x:Name="CompletedTaskListView" SelectionMode="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="local:TaskItem">
-                                    <CheckBox Content="{x:Bind Name}" IsChecked="True" Unchecked="Task_Unchecked" Foreground="Gray" Margin="0,5"/>
+                                    <CheckBox Content="{x:Bind Name}" IsChecked="True" Unchecked="Task_Unchecked" Foreground="Gray" />
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+
+                        <!-- Session details frame -->
+                        <Frame x:Name="contentFrame" Margin="0,20,0,0" Height="200" />
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
