@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\alecs\\My Drive\\UJEP\\GUI\\WebUI\\Pomodoro\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9FB800A2-5344-2C8E-4C1C-7C185BDEB872}|Pomodoro\\Pomodoro.csproj|c:\\users\\alecs\\my drive\\ujep\\gui\\webui\\pomodoro\\pomodoro\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FB800A2-5344-2C8E-4C1C-7C185BDEB872}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FB800A2-5344-2C8E-4C1C-7C185BDEB872}|Pomodoro\\Pomodoro.csproj|c:\\users\\alecs\\my drive\\ujep\\gui\\webui\\pomodoro\\pomodoro\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{9FB800A2-5344-2C8E-4C1C-7C185BDEB872}|Pomodoro\\Pomodoro.csproj|solutionrelative:pomodoro\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\alecs\\My Drive\\UJEP\\GUI\\WebUI\\Pomodoro\\Pomodoro\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Pomodoro\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\alecs\\My Drive\\UJEP\\GUI\\WebUI\\Pomodoro\\Pomodoro\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Pomodoro\\MainWindow.xaml.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwB4AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T09:39:48.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\alecs\\My Drive\\UJEP\\GUI\\WebUI\\Pomodoro\\Pomodoro\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Pomodoro\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\alecs\\My Drive\\UJEP\\GUI\\WebUI\\Pomodoro\\Pomodoro\\MainWindow.xaml",
+              "RelativeToolTip": "Pomodoro\\MainWindow.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-02-22T09:39:21.357Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
