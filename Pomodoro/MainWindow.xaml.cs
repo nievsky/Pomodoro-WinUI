@@ -27,9 +27,23 @@ namespace Pomodoro
             CompletedTasks = new ObservableCollection<TaskItem>();
             HistoryRecords = new ObservableCollection<SessionRecord>();
 
-            ActiveTaskListView.ItemsSource = ActiveTasks;
-            CompletedTaskListView.ItemsSource = CompletedTasks;
-            HistoryListView.ItemsSource = HistoryRecords;
+            // wire collections to component controls
+            TaskPane.ActiveTaskListView.ItemsSource = ActiveTasks;
+            TaskPane.CompletedTaskListView.ItemsSource = CompletedTasks;
+            HistoryPane.HistoryListView.ItemsSource = HistoryRecords;
+
+            // wire component events to this window's handlers
+            TimerPane.PrimaryActionBtn.Click += PrimaryAction_Click;
+            TimerPane.ResetBtn.Click += Reset_Click;
+            TimerPane.SkipBtn.Click += Skip_Click;
+            TimerPane.TimerDisplay.LostFocus += TimerDisplay_LostFocus;
+
+            TaskPane.AddTaskBtn.Click += (s, ev) => CreateTask();
+            TaskPane.NewTaskInput.KeyDown += NewTaskInput_KeyDown;
+            TaskPane.TaskChecked += Task_Checked;
+            TaskPane.TaskUnchecked += Task_Unchecked;
+
+            HistoryPane.HistoryListView.ItemClick += HistoryListView_ItemClick;
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
@@ -62,7 +76,7 @@ namespace Pomodoro
 
         private void UpdateDisplay()
         {
-            TimerDisplay.Text = _timeLeft.ToString(@"mm\:ss");
+            TimerPane.TimerDisplay.Text = _timeLeft.ToString(@"mm\:ss");
         }
 
         private void UpdateTimerProgress()
@@ -70,11 +84,11 @@ namespace Pomodoro
             if (_initialTime.TotalSeconds > 0)
             {
                 double percent = (_timeLeft.TotalSeconds / _initialTime.TotalSeconds) * 100.0;
-                TimerProgress.Value = Math.Max(0, Math.Min(100, percent));
+                TimerPane.TimerProgress.Value = Math.Max(0, Math.Min(100, percent));
             }
             else
             {
-                TimerProgress.Value = 0;
+                TimerPane.TimerProgress.Value = 0;
             }
         }
 
@@ -83,14 +97,14 @@ namespace Pomodoro
             if (_isRunning)
             {
                 _timer.Stop();
-                PrimaryActionBtn.Content = "Start";
+                TimerPane.PrimaryActionBtn.Content = "Start";
             }
             else
             {
                 if (_timeLeft.TotalSeconds > 0)
                 {
                     _timer.Start();
-                    PrimaryActionBtn.Content = "Pause";
+                    TimerPane.PrimaryActionBtn.Content = "Pause";
                 }
             }
             _isRunning = !_isRunning;
@@ -100,7 +114,7 @@ namespace Pomodoro
         {
             _timer.Stop();
             _isRunning = false;
-            PrimaryActionBtn.Content = "Start";
+            TimerPane.PrimaryActionBtn.Content = "Start";
             _timeLeft = _initialTime;
             UpdateDisplay();
         }
@@ -112,7 +126,7 @@ namespace Pomodoro
             // 1. Stop the timer
             _timer.Stop();
             _isRunning = false;
-            PrimaryActionBtn.Content = "Start";
+            TimerPane.PrimaryActionBtn.Content = "Start";
             _timeLeft = TimeSpan.Zero;
             UpdateDisplay();
 
@@ -139,11 +153,11 @@ namespace Pomodoro
 
         private void TimerDisplay_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (TimeSpan.TryParseExact(TimerDisplay.Text, @"mm\:ss", null, out TimeSpan parsedTime))
+            if (TimeSpan.TryParseExact(TimerPane.TimerDisplay.Text, @"mm\:ss", null, out TimeSpan parsedTime))
             {
                 _initialTime = parsedTime;
             }
-            else if (int.TryParse(TimerDisplay.Text, out int minutes))
+            else if (int.TryParse(TimerPane.TimerDisplay.Text, out int minutes))
             {
                 _initialTime = TimeSpan.FromMinutes(minutes);
             }
@@ -159,10 +173,10 @@ namespace Pomodoro
 
         private void CreateTask()
         {
-            if (!string.IsNullOrWhiteSpace(NewTaskInput.Text))
+            if (!string.IsNullOrWhiteSpace(TaskPane.NewTaskInput.Text))
             {
-                ActiveTasks.Add(new TaskItem { Name = NewTaskInput.Text });
-                NewTaskInput.Text = string.Empty;
+                ActiveTasks.Add(new TaskItem { Name = TaskPane.NewTaskInput.Text });
+                TaskPane.NewTaskInput.Text = string.Empty;
             }
         }
 
