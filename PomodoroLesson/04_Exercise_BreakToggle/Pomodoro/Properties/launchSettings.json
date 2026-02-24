@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Pomodoro (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Pomodoro (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

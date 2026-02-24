@@ -24,7 +24,7 @@ namespace Pomodoro.Components
             addTaskBtn.Click += AddTaskBtn_Click;
             newTaskInput.KeyDown += NewTaskInput_KeyDown;
             
-
+        }
         public TextBox NewTaskInput => newTaskInput;
         public Button AddTaskBtn => addTaskBtn;
         public ListView ActiveTaskListView => activeTaskListView;
