@@ -24,5 +24,11 @@ namespace Pomodoro.Components
                 detailFrame.Content = new SessionDetailPage(record);
             }
         }
+
+        private void ClearHistoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SessionManager.Instance.HistoryRecords.Clear();
+            detailFrame.Content = null;
+        }
     }
 }
