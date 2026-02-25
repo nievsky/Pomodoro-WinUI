@@ -1,0 +1,19 @@
+<UserControl
+    x:Class="Pomodoro.Components.TimerPane"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pomodoro.Components">
+
+    <StackPanel Padding="12" Spacing="8">
+        <StackPanel Orientation="Horizontal" Spacing="12">
+            <RadioButton x:Name="FocusRadio" Content="Focus (25m)" GroupName="TimerMode" />
+            <RadioButton x:Name="BreakRadio" Content="Short Break (5m)" GroupName="TimerMode" />
+        </StackPanel>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="120" Width="120">
+            <ProgressRing x:Name="ModeRing" IsActive="True" Width="120" Height="120" />
+            <TextBox x:Name="TimerDisplay" Text="25:00" IsReadOnly="True" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Background="Transparent" FontSize="24" TextAlignment="Center" />
+        </Grid>
+    </StackPanel>
+
+</UserControl>

@@ -1,0 +1,41 @@
+<Window
+    x:Class="Pomodoro.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pomodoro"
+    xmlns:components="using:Pomodoro.Components">
+
+    <NavigationView x:Name="NavView" PaneDisplayMode="Top">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Focus" Tag="Focus" Icon="Clock" />
+            <NavigationViewItem Content="Short Break" Tag="Break" Icon="Emoji2" />
+        </NavigationView.MenuItems>
+
+        <Grid Padding="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <components:HistoryPane x:Name="HistoryPane" Grid.Column="0" />
+
+            <Grid Grid.Column="1" Padding="24,0,0,0" MaxWidth="600" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <components:TimerPane x:Name="TimerPane" Grid.Row="0" />
+                
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Spacing="10">
+                        <components:TaskPane x:Name="TaskPane" />
+
+                        <!-- Session details frame -->
+                        <Frame x:Name="contentFrame" Margin="0,20,0,0" Height="200" />
+                    </StackPanel>
+                </ScrollViewer>             
+            </Grid>
+        </Grid>
+    </NavigationView>
+</Window>

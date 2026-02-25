@@ -1,0 +1,7 @@
+{
+  "omnisharp.useModernNet": true,
+  "omnisharp.path": "latest",
+  "omnisharp.loggingLevel": "Trace",
+  "omnisharp.autoStart": true,
+  "dotnet.defaultSolution": "Pomodoro.sln"
+}
