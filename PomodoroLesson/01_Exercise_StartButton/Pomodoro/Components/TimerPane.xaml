@@ -19,11 +19,11 @@
                         Background="Transparent" />
         </Grid>
 
-        <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
+        <!-- <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
             <Button x:Name="resetBtn" Content="🔄" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Reset"/>
             <Button x:Name="primaryActionBtn" Content="Start" Width="120" FontSize="18"/>
             <Button x:Name="skipBtn" Content="⏭" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Skip Session"/>
-        </StackPanel>
+        </StackPanel> -->
 
         <MenuFlyoutSeparator Margin="0,20,0,0"/>
     </StackPanel>

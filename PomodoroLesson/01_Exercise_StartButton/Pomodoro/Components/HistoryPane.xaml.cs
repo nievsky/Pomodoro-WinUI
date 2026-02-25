@@ -1,5 +1,7 @@
+
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
+using Pomodoro; // for SessionManager, SessionRecord, SessionDetailPage
 
 namespace Pomodoro.Components
 {
