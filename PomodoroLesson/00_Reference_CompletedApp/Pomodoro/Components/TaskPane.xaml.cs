@@ -16,7 +16,7 @@ namespace Pomodoro.Components
             // It wires up your variables: It finds every element in your XAML that has an x:Name (like TimerDisplay or HistoryPane) and connects them to the C# variables so they aren't null.
 
             // It hooks up your events: It connects XAML events (like Click="PrimaryAction_Click") to the actual C# methods you wrote.
-            
+
             this.InitializeComponent();
 
             // bind list sources to the shared SessionManager
@@ -25,7 +25,7 @@ namespace Pomodoro.Components
 
             addTaskBtn.Click += AddTaskBtn_Click;
             newTaskInput.KeyDown += NewTaskInput_KeyDown;
-            
+
         }
         public TextBox NewTaskInput => newTaskInput;
         public Button AddTaskBtn => addTaskBtn;
