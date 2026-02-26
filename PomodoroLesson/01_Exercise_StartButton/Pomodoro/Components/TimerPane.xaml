@@ -8,7 +8,7 @@
             <ProgressRing x:Name="timerProgress" IsIndeterminate="False" Value="100" Maximum="100" 
                           Width="280" Height="280" Foreground="#20E585" />
 
-            <TextBox x:Name="timerDisplay" 
+            <TextBox x:Name="timerDisplay"
                         Text="25:00" 
                         FontSize="80" 
                         FontWeight="Bold" 
@@ -19,11 +19,6 @@
                         Background="Transparent" />
         </Grid>
 
-        <!-- <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
-            <Button x:Name="resetBtn" Content="🔄" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Reset"/>
-            <Button x:Name="primaryActionBtn" Content="Start" Width="120" FontSize="18"/>
-            <Button x:Name="skipBtn" Content="⏭" FontSize="20" Background="Transparent" ToolTipService.ToolTip="Skip Session"/>
-        </StackPanel> -->
 
         <MenuFlyoutSeparator Margin="0,20,0,0"/>
     </StackPanel>
